@@ -1,5 +1,4 @@
-
-name: Deploy Backend come on
+name: Deploy Backend
 
 on:
   push:
@@ -18,18 +17,17 @@ jobs:
     - name: Change Directory to Terraform Project
       run: cd website
 
-    - name: List Files in Directory
-      run: ls -la ./website
-
     - name: Terraform Setup
       uses: hashicorp/setup-terraform@v1
       
     - name: Terraform Init
-      run: terraform init
+      run: |
+        cd ./website
+        terraform init -reconfigure
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         
     - name: Terraform validate
       run: terraform validate
@@ -40,6 +38,7 @@ jobs:
         terraform apply -auto-approve
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
 
