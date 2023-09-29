@@ -18,6 +18,9 @@ jobs:
     - name: Change Directory to Terraform Project
       run: cd website
 
+    - name: List Files in Directory
+      run: ls -la ./website
+
     - name: Terraform Setup
       uses: hashicorp/setup-terraform@v1
       
