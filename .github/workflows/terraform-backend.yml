@@ -14,9 +14,6 @@ jobs:
     - name: Checkout Repo
       uses: actions/checkout@v2
 
-    - name: Change Directory to Terraform Project
-      run: cd website
-
     - name: Terraform Setup
       uses: hashicorp/setup-terraform@v1
       
